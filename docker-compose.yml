@@ -28,6 +28,12 @@ services:
   valhalla:
     image: gisops/valhalla:latest
     container_name: valhalla_latest
+    build:
+      context: .
+     # in case you need to build image without requiring sudo privileges on the files created by the container, you should provide your user's UID/GID
+      args:
+        - VALHALLA_UID=1000
+        - VALHALLA_GID=1000
     ports:
       - 8002:8002
       
