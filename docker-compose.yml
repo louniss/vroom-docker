@@ -28,12 +28,6 @@ services:
   valhalla:
     image: gisops/valhalla:latest
     container_name: valhalla_latest
-    build:
-      context: .
-     # in case you need to build image without requiring sudo privileges on the files created by the container, you should provide your user's UID/GID
-      args:
-        - VALHALLA_UID=1000
-        - VALHALLA_GID=1000
     ports:
       - 8002:8002
       
@@ -49,6 +43,8 @@ services:
       - build_time_zones=True  # build timezone db with "True" or "Force"
       - build_tar=True  # build an indexed tar file from the tile_dir for faster graph loading times
       - force_rebuild=False  # forces a rebuild of the routing tiles with "True"
+      - VALHALLA_UID=1000
+      - VALHALLA_GID=1000
 
   # EXAMPLE for OpenRouteService, please consult the repo for details: https://github.com/GIScience/openrouteservice
 #  ors:
